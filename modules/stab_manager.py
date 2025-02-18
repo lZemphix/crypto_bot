@@ -110,7 +110,7 @@ class TempOrdersManager(StabBase):
         actual_exec_order = self.orders.get_order_history()[0] # Получение актуального ордера
         actual_order_id = actual_exec_order.get('orderId') # Получение актуального айди ордера
         if actual_exec_order.get('side') == 'Buy' and actual_order_id != last_order_id: # покупка и айди актуального не совпадает с айди из темпа
-            last_exec_order_value = float(actual_exec_order.get('cumExecValue')) # Перевод исполненной цены в юсдт из актуального ордера во флоат
+            last_exec_order_value = float(actual_exec_order.get('avgPrice')) # Перевод исполненной цены в юсдт из актуального ордера во флоат
             orders.append(last_exec_order_value) # Добавление нового ордера в список ордеров, полученного из темпа
             self.temp_manager.update(lastOrderId=actual_order_id) # Запись айди последнего ордера
             return orders
