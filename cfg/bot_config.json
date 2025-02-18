@@ -1,0 +1,9 @@
+{
+    "symbol" : "symbol",
+    "interval" : "0",
+    "amountBuy" : 0.0,
+    "RSI": 0,
+    "stepBuy": 0.00,
+    "stepSell": 0.00,
+    "send_notify": true
+}
