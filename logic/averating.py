@@ -24,16 +24,17 @@ class Averating(BotBase):
         import ta
         df = self.klines.get_klines_dataframe()
         rsi = ta.momentum.rsi(df.close).iloc[-1]
-        return rsi
+        # return rsi
+        return 40
     
     def valid_balance(self):
-        usdt_balance = self.temp_balance.get()['USDT']
+        usdt_balance = self.temp_balance.get_updated()['USDT']
         amount_buy_price = get_bot_config('amountBuy')
         return True if usdt_balance > amount_buy_price else False
     
     def valid_price(self):
         avg_order = self.temp_orders.get_avg_order()
-        actual_price = float(self.temp_klines.get()[0][4])
+        actual_price = float(self.temp_klines.get_updated()[0][4])
         step_buy = get_bot_config('stepBuy')
         step_higher = step_buy > (actual_price - avg_order)
         return True if actual_price < avg_order and step_higher else False
@@ -48,6 +49,7 @@ class Averating(BotBase):
 
 
     def activate(self) -> None:
+
         if self.get_rsi() < self.RSI:
             if self.valid_balance():
                 if self.cross.cross_up_to_down():                        
