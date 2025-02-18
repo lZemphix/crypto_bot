@@ -7,7 +7,7 @@ logger = getLogger(__name__)
 file = FileHandler('logs.log', mode='a')
 console = StreamHandler()
 
-basicConfig(level=DEBUG, format=FORMAT, datefmt=DATE_FMT, handlers=[file, console])
+basicConfig(level=INFO, format=FORMAT, datefmt=DATE_FMT, handlers=[file, console])
 
 logging.getLogger('urllib3').setLevel(WARNING)
 logging.getLogger('requests').setLevel(WARNING)
