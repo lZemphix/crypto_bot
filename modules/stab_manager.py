@@ -128,11 +128,11 @@ class TempOrdersManager(StabBase):
 
     def get_qty(self):
         orders = self.read_orders()
-        return len(orders) if len(orders) != 0 else 1
+        return len(orders)
 
     def get_avg_order(self) -> float:
         orders = self.read_orders()
-        avg_orders = sum(orders) / self.get_qty()
+        avg_orders = sum(orders) / self.get_qty() if self.get_qty() != 0 else 1
         return round(avg_orders , 3)
 
 class LapsManager(StabBase):
