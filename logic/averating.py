@@ -24,8 +24,7 @@ class Averating(BotBase):
         import ta
         df = self.klines.get_klines_dataframe()
         rsi = ta.momentum.rsi(df.close).iloc[-1]
-        # return rsi
-        return 40
+        return rsi
     
     def valid_balance(self):
         usdt_balance = self.temp_balance.get_updated()['USDT']
@@ -59,5 +58,5 @@ class Averating(BotBase):
                             self.__notify()
             else:
                 self.notifies_manager.invalid_balance() 
-a = Averating()
-print(a.valid_price())
+
+                

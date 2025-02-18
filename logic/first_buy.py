@@ -33,7 +33,6 @@ class Buy(BotBase):
 
     def activate(self) -> None:
         actual_rsi = self._get_rsi()
-        actual_rsi = 40
         orders_qty = self.temp_orders.get_qty()
         if actual_rsi < self.RSI and orders_qty == 0:
             if self.orders.place_buy_order() == True:
