@@ -9,7 +9,7 @@ import logging
 def main():
     try: 
         logger = logging.getLogger(__name__)
-        logging.getLogger('_http_manager').setLevel(logging.WARNING)
+        logging.getLogger('_http_manager').setLevel(logging.CRITICAL)
         Bot().activate()
     except Exception as e:
         eid = random.randint(100000, 9999999)
