@@ -199,4 +199,3 @@ class LinesManager(StabBase):
             f.write()
         return True
 
-
