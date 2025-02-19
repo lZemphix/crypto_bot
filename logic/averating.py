@@ -52,14 +52,15 @@ class Averating(BotBase):
 
 
     def activate(self) -> None:
-        if self.get_rsi() < self.RSI:
+        # if self.get_rsi() < self.RSI:
             if self.valid_balance():
                 if self.cross.cross_down_to_up():                        
                     if self.valid_price():
                         if self.orders.place_buy_order():
                             if self.temp_orders.update_orders():
-                                self.__notify()
-                                time.sleep(2)
+                                if self.lines.write_lines(self.temp_orders.get_avg_order()):
+                                    self.__notify()
+                                    time.sleep(2)
             else:
                 self.notifies_manager.invalid_balance() 
 
