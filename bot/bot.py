@@ -1,3 +1,4 @@
+import time
 from client.bases import BotBase
 from logging import getLogger
 from logic.averating import Averating
@@ -20,11 +21,10 @@ class Bot(BotBase):
         self.temp_klines = TempKlinesManager()
 
     def activate(self):
-        logger.info(f'Bot activated. Pair: {self.symbol}, balance: {self.temp_balance.get()["USDT"]}')
-        self.notify.bot_status(f'Bot **activated**.\nPair: {self.symbol}\nBalance: {self.temp_balance.get()["USDT"]}')
+        logger.info(f'Bot activated. Pair: {self.symbol}, balance: {self.temp_balance.get_updated()["USDT"]}')
+        self.notify.bot_status(f'Bot **activated**.\nPair: {self.symbol}\nBalance: {self.temp_balance.get_updated()["USDT"]}')
 
         while True:
-
             self.temp_balance.update()
             self.temp_klines.update()
             self.buy_script.activate()
