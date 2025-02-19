@@ -125,6 +125,7 @@ class TempOrdersManager(StabBase):
         orders = self._get_orders()
         if orders != False:
             self.temp_manager.update(orders=orders)
+            return True
 
     def get_qty(self):
         orders = self.read_orders()
