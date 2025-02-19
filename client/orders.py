@@ -1,6 +1,7 @@
 from logging import getLogger
 from client.bases import Client
 from client.account import Account
+from cfg.config import get_bot_config
 
 logger = getLogger(__name__)
 
@@ -33,7 +34,8 @@ class Orders(Client):
                 symbol=self.symbol,
                 side='Buy',
                 orderType='Market',
-                qty=self.amount_buy,
+                marketUnit='quoteCoin',
+                qty=get_bot_config('amountBuy')
             )
             return True
         except Exception as e:
@@ -43,7 +45,8 @@ class Orders(Client):
     def place_sell_order(self) -> bool:
         try:
             coin_name = self.symbol.replace('USDT', '')
-            amount = float(self.account.get_balance().get(coin_name)[:4])
+            amount = self.account.get_balance().get(coin_name)[:4]
+            print(amount)
             self.client.place_order(
                 category='spot',
                 symbol=self.symbol,
@@ -54,6 +57,3 @@ class Orders(Client):
             return True
         except Exception as e:
             logger.error(e)
-
-        
-    
